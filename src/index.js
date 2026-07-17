@@ -1,5 +1,5 @@
-import { GerarSenha } from './screens/geradorSenha.js';
-import { ConsultaCPF } from './screens/consultaCpf.js';
+import { GerarSenha } from './screens/GeradorSenha.js';
+import { ConsultaCPF } from './screens/ConsultaCPF.js';
 
 const routes = {
     senha: GerarSenha,
@@ -30,3 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+const ajax = obj => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(obj.metodo, obj.url, true);
+    xhr.send();
+
+    xhr.addEventListener('load', () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            obj.sucesso(xhr.responseText);
+
+        } else {
+            obj.error(xhr.statusText );
+        }
+    })}; 
+
+
+function carregaTela(el) {
+    const href = el.getAttribute('href');
+    console.log('Carregando tela:', href);
+}
