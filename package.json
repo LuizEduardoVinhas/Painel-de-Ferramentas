@@ -1,0 +1,24 @@
+{
+  "name": "softwareconsulta",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido para gerar senha segura, consulta de cpf e macanismo utilizados para fins administrativos.",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+  "build": "webpack",
+  "watch": "webpack --watch"
+  },
+  "devDependencies": {
+    "@babel/cli": "^8.0.4",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "babel-loader": "^10.1.1",
+    "core-js": "^3.49.0",
+    "regenerator-runtime": "^0.14.1",
+    "webpack": "^5.108.4",
+    "webpack-cli": "^7.2.1",
+    "weebpack": "^1.0.1"
+  }
+}
