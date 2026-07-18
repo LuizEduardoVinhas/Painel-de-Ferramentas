@@ -7,8 +7,8 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-  "build": "webpack",
-  "watch": "webpack --watch"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "devDependencies": {
     "@babel/cli": "^8.0.4",
@@ -16,7 +16,9 @@
     "@babel/preset-env": "^8.0.2",
     "babel-loader": "^10.1.1",
     "core-js": "^3.49.0",
+    "css-loader": "^7.1.4",
     "regenerator-runtime": "^0.14.1",
+    "style-loader": "^4.0.0",
     "webpack": "^5.108.4",
     "webpack-cli": "^7.2.1"
   }

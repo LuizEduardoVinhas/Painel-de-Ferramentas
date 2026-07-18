@@ -8,16 +8,20 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            include: path.resolve(__dirname, 'src'),
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: [['@babel/preset-env', { modules: 'commonjs' }]]
+        rules: [
+            {
+                test: /\.js$/,
+                include: path.resolve(__dirname, 'src'),
+                use: {
+                    loader: 'babel-loader',
+                    options: { presets: [['@babel/preset-env', { modules: 'commonjs' }]] }
                 }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
-        }]
+        ]
     },
     devtool: 'source-map'
 };

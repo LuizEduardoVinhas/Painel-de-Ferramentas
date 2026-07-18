@@ -4,46 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Ferramentas</title>
+    <title>DevTools Lab — Painel de utilidades moderno e rápido</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header class="menu-principal">
-        <div class="logo">
-            <img src="./img/logo.png" alt="Logo do Painel de Ferramentas">
-        </div>
-        <div class="titulo-container">
-            <h1 class="titulo">Painel de Ferramentas</h1>
-            <p class="subtitulo">Sua central de utilitários rápidos e seguros</p>
+        <div class="header-topo">
+            <div class="logo-container">
+                <img src="./img/logo.png" alt="Logo DevTools Lab">
+            </div>
+            <div class="titulo-container">
+                <h1 class="titulo">DevTools Lab</h1>
+                <p class="subtitulo">Ferramentas rápidas, design limpo e desempenho moderno.</p>
+            </div>
         </div>
         <nav class="menu-navegacao">
-            <button id="btn-gerador" data-screen="senha">Gerador de Senha</button>
-            <button id="btn-cpf" data-screen="consulta">Validador de CPF</button>
+            <button id="btn-gerador" data-screen="senha"><i class="fas fa-lock"></i> Gerar Senha</button>
+            <button id="btn-cpf" data-screen="consulta"><i class="fas fa-id-card"></i> Validar CPF</button>
         </nav>
     </header>
 
     <main id="app">
-        <div class="container-principal">
-            <div class="titulo">
-                <h1>Bem-vindo ao Painel de Ferramentas</h1>
-                <p>Selecione uma das opções acima para gerar uma senha forte ou validar documentos instantaneamente.</p>
+        <section class="hero-bloco">
+            <div class="hero-copy">
+                <span class="eyebrow">Painel de utilidades</span>
+                <h1><span>DevTools</span> em um só lugar para turbinar sua rotina.</h1>
+                <h2>Design limpo, respostas rápidas e recursos prontos para uso.</h2>
+                <p>Uma coleção de utilitários ágeis que deixam seu fluxo mais eficiente com estilo e velocidade.</p>
+                <div class="hero-actions">
+                    <button class="hero-chat" id="btn-feedback" data-screen="feedback">Fale conosco</button>
+                </div>
             </div>
-            
-            <div class="imagem">
-                <img src="./img/ferramentas.svg" alt="" aria-hidden="true">
+            <div class="hero-image imagem">
+                <img src="./img/fotomain.png" alt="Ilustração de segurança de dados, CPF e senha">
             </div>
-            
-            <div class="falecmg">
-                <button id="btn-falecmg">Fale Comigo</button>
-            </div>
-        </div>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Painel de Ferramentas. Todos os direitos reservados. </p>
-        <p>Desenvolvido por <a href="https://github.com/luizgabriel" target="_blank" rel="noopener noreferrer">Luiz Eduardo</a></p>
+        <p>&copy; 2026 DevTools Lab. Feito com foco em performance.</p>
+        <p>Criado por <strong>Luiz Eduardo</strong> • <a href="https://github.com/LuizEduardoVinhas" target="_blank" rel="noopener noreferrer">github.com/LuizEduardoVinhas</a></p>
     </footer>
 
     <script src="./assets/js/bundle.js"></script>
