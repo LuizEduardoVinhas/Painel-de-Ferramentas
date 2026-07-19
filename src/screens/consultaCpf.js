@@ -3,24 +3,13 @@ export const ConsultaCPF = {
         return `
             <button class="btn-voltar" id="btnVoltar">← Voltar</button>
             <section class="container-consulta">
-                <div class="page-header">
-                    <div>
-                        <h2>Validador de CPF</h2>
-                        <p>Insira um CPF para verificar se ele é válido de acordo com o cálculo oficial.</p>
-                    </div>
-                </div>
+                <h2>Validador de CPF</h2>
+                <p>Insira um CPF para verificar se ele é válido de acordo com o cálculo oficial.</p>
 
                 <div class="cpf-card">
-                    <label class="form-field" for="cpfInput">
-                        <span>CPF</span>
-                        <input type='text' id='cpfInput' placeholder='000.000.000-00' maxlength='14'>
-                    </label>
-
-                    <div class="control-row">
-                        <button class="hero-cta" id='btnValidar'>Validar CPF</button>
-                        <button class="hero-secondary" id='btnLimpar' type='button'>Limpar</button>
-                    </div>
-
+                    <input type='text' id='cpfInput' placeholder='000.000.000-00' maxlength='14'>
+                    <button id='btnValidar'>Validar CPF</button>
+                    <button id='btnLimpar' type='button'>Limpar</button>
                     <div class="cpf-result" id='cpfResultado'>Digite um CPF e clique em validar para conferir o status.</div>
                 </div>
             </section>
@@ -28,62 +17,76 @@ export const ConsultaCPF = {
     },
 
     after_render: () => {
-        const formatCPF = cpf => cpf.replace(/\D/g, '');
-        const validarCPF = cpf => {
-            if (!cpf || cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
-            const calcularDigito = (cpf, fator) => {
-                let total = 0;
-                for (let i = 0; i < fator - 1; i += 1) {
-                    total += Number(cpf[i]) * (fator - i);
-                }
-                const resto = (total * 10) % 11;
-                return resto === 10 ? 0 : resto;
-            };
-
-            const digito1 = calcularDigito(cpf, 10);
-            const digito2 = calcularDigito(cpf, 11);
-            return digito1 === Number(cpf[9]) && digito2 === Number(cpf[10]);
-        };
-
-        const cpfInput = document.getElementById('cpfInput');
-        const btnValidar = document.getElementById('btnValidar');
-        const btnLimpar = document.getElementById('btnLimpar');
-        const cpfResultado = document.getElementById('cpfResultado');
-
-        const updateStatus = (message, valid) => {
-            cpfResultado.textContent = message;
-            cpfResultado.classList.remove('valid', 'invalid');
-            if (valid === true) cpfResultado.classList.add('valid');
-            if (valid === false) cpfResultado.classList.add('invalid');
-        };
-
-        btnValidar.addEventListener('click', () => {
-            const rawCpf = formatCPF(cpfInput.value);
-            const formatted = rawCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-
-            if (!rawCpf) {
-                updateStatus('Digite um CPF para iniciar a validação.', null);
-                return;
+        class validaCPF {
+            constructor(cpf) {
+                Object.defineProperty(this, 'cpfLimpo', {
+                    enumerable: true,
+                    get: () => cpf.replace(/\D+/g, '')
+                })
             }
+        }
 
-            if (rawCpf.length !== 11) {
-                updateStatus('CPF incompleto. Use 11 dígitos numéricos.', false);
-                return;
-            }
+        validaCPF.prototype.valida = function () {
+            if (typeof this.cpfLimpo === 'undefined') return false;
+            if (this.cpfLimpo.length !== 11) return false;
+            if (this.sequencia()) return false;
 
-            const valido = validarCPF(rawCpf);
-            if (valido) {
-                updateStatus(`CPF ${formatted} válido.`, true);
+            const cpfparcial = this.cpfLimpo.slice(0, -2);
+            const digito1 = this.criaDigito(cpfparcial);
+            const digito2 = this.criaDigito(cpfparcial + digito1);
+
+            const novoCpf = cpfparcial + digito1 + digito2;
+
+
+            return novoCpf === this.cpfLimpo;
+        }
+
+        validaCPF.prototype.criaDigito = function (cpfparcial) {
+            const array = Array.from(cpfparcial);
+            let regressivo = array.length + 1;
+
+            const total = array.reduce((ac, val) => {
+                ac += (regressivo * Number(val));
+                regressivo--;
+                return ac;
+            }, 0);
+
+            const digito = 11 - (total % 11);
+            return digito > 9 ? '0' : String(digito);
+
+        }
+
+        validaCPF.prototype.sequencia = function () {
+            return this.cpfLimpo[0].repeat(11) == this.cpfLimpo;
+        }
+
+        const bntValidar = document.querySelector('#btnValidar');
+        const bntLimpar = document.querySelector('#btnLimpar');
+        const inputCPF = document.querySelector('#cpfInput')
+        const divResultado = document.querySelector('#cpfResultado')
+
+        bntValidar.addEventListener('click', () => {
+            const valorDoInput = inputCPF.value;
+
+            const validacao = new validaCPF(valorDoInput);
+
+            if (validacao.valida()) {
+                divResultado.textContent = 'CPF Válido!';
+                divResultado.classList.remove('invalid');
+                divResultado.classList.add('valid');
             } else {
-                updateStatus(`CPF ${formatted} inválido.`, false);
+                divResultado.textContent = 'CPF Inválido.';
+                divResultado.classList.remove('valid');
+                divResultado.classList.add('invalid');
             }
         });
 
-        btnLimpar.addEventListener('click', () => {
-            cpfInput.value = '';
-            updateStatus('Digite um CPF e clique em validar para conferir o status.', null);
-        });
+        bntLimpar.addEventListener('click', () => {
+            inputCPF.value = '';
+            divResultado.textContent = 'Digite um CPF e clique em validar para conferir o status.';
+            divResultado.classList.remove('valid', 'invalid');
+        })
 
         const btnVoltar = document.getElementById('btnVoltar');
         if (btnVoltar) {
