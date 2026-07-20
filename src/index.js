@@ -6,7 +6,6 @@ const routes = {
     senha: GerarSenha,
     consulta: ConsultaCPF,
     contato: ContatoScreen,
-    feedback: ContatoScreen
 };
 
 export function navegação(tela, params) {
@@ -23,17 +22,15 @@ export function navegação(tela, params) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('button[data-screen]');
-
-    buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const screen = event.currentTarget.dataset.screen;
-            if (screen) {
-                navegação(screen);
-            }
-        });
-    });
+document.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-screen]');
+    
+    if (button) {
+        const screen = button.dataset.screen;
+        if (screen) {
+            navegação(screen);
+        }
+    }
 });
 
 const ajax = obj => {
