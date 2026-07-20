@@ -1,4 +1,4 @@
-export const ConsultaCPF = {
+export const Consultacpf = {
     render: () => {
         return `
             <button class="btn-voltar" id="btnVoltar">← Voltar</button>

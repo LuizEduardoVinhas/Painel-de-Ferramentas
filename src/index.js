@@ -1,5 +1,5 @@
 import { GerarSenha } from './screens/GeradorSenha.js';
-import { ConsultaCPF } from './screens/ConsultaCPF.js';
+import { ConsultaCPF } from './screens/Consultacpf.js';
 import { ContatoScreen } from './screens/Contato.js';
 
 const routes = {
