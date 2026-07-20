@@ -7,8 +7,9 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build": "webpack --mode production",
+    "watch": "webpack --watch",
+    "start": "node server.js"
   },
   "devDependencies": {
     "@babel/cli": "^8.0.4",
