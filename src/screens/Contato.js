@@ -45,7 +45,7 @@ export const ContatoScreen = {
     },
 
     after_render: () => {
-        const btnVoltar = document.getElementById('btnVoltar') || document.getElementById('btn-voltar-home');
+        const btnVoltar = document.getElementById('btnVoltar');
         if (btnVoltar) {
             btnVoltar.addEventListener('click', () => {
                 window.location.href = '/public/index.html';
