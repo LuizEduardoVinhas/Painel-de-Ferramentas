@@ -1,9 +1,12 @@
 import { GerarSenha } from './screens/GeradorSenha.js';
 import { ConsultaCPF } from './screens/ConsultaCPF.js';
+import { ContatoScreen } from './screens/Contato.js';
 
 const routes = {
     senha: GerarSenha,
-    consulta: ConsultaCPF
+    consulta: ConsultaCPF,
+    contato: ContatoScreen,
+    feedback: ContatoScreen
 };
 
 export function navegação(tela, params) {
@@ -21,12 +24,14 @@ export function navegação(tela, params) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.menu-navegacao button');
+    const buttons = document.querySelectorAll('button[data-screen]');
 
     buttons.forEach(button => {
         button.addEventListener('click', (event) => {
             const screen = event.currentTarget.dataset.screen;
-            navegação(screen);
+            if (screen) {
+                navegação(screen);
+            }
         });
     });
 });
