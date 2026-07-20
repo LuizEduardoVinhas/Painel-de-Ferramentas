@@ -9,7 +9,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "watch": "webpack --watch",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prebuild": "chmod +x node_modules/.bin/webpack"
   },
   "devDependencies": {
     "@babel/cli": "^8.0.4",
